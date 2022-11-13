@@ -5,9 +5,9 @@ Simple Twitch app for iOS 6.
 Go to the dist/app.js select RAW js code and copy it. 
 On the iOS device in Safari Browser create [Twitch](https://m.twitch.tv) bookmark. 
 
-After go to the bookmarks find this Twitch bookmark and click it to edit. 
+Go to the bookmarks, find created Twitch bookmark and click it to edit. 
 
-In field address type:
+In address field type:
 
 ```
 javascript:[raw code selected from dist/app.js]
