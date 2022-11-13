@@ -10,7 +10,7 @@
             </button>
 
             <form action="#" method="GET" class="search__header__form">
-                <input @input="search" v-model="query.variables.queryFragment" class="search__header-input" type="text" required placeholder="Search...">
+                <input ref="input" @input="search" v-model="query.variables.queryFragment" class="search__header-input" type="text" required placeholder="Search...">
             </form>
         </header>
 
@@ -45,6 +45,10 @@ export default {
                 }
             }
         }
+    },
+
+    mounted() {
+        this.$refs.input.focus();
     },
 
     methods: {
