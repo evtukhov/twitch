@@ -27,6 +27,7 @@
 import SearchSuggestionChannel from '@/Components/Search/Suggestion/Channel';
 import SearchSuggestionCategory from '@/Components/Search/Suggestion/Category';
 import {api} from "@/Utilites/Api.js";
+import {debounce} from "@/helpers.js";
 
 export default {
     name: "SearchIndex",
@@ -56,7 +57,7 @@ export default {
             return window.history.length ? this.$router.go(-1) : this.$router.push('/');
         },
 
-        search() {
+        search: debounce(function () {
             if (this.loading) {
                 return false;
             }
@@ -70,7 +71,7 @@ export default {
 
                 this.loading = false;
             });
-        }
+        }, 500),
     }
 }
 </script>
