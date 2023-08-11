@@ -2,10 +2,11 @@
     <div class="page">
         <div class="stream">
             <div class="stream__video">
-                <video controls v-if="url" :src="url"></video>
+                <video ref="video" controls v-if="url" :src="url"></video>
             </div><!--
                 Inline-block space fix
-            --><div class="stream__content">
+            -->
+            <div class="stream__content">
                 <div class="stream__columns" v-if="channel">
                     <div class="stream__user">
                         <figure class="stream__user-avatar">
@@ -22,6 +23,14 @@
                             </RouterLink>
                         </p>
                     </div>
+                </div>
+
+                <div class="stream__quality">
+                    <button @click="setQuality(resolution.url)" type="button" class="button stream__quality-button"
+                            v-for="resolution in resolutions"
+                    >
+                        {{ resolution.quality }}
+                    </button>
                 </div>
 
                 <div class="stream__chat">
@@ -41,6 +50,7 @@ export default {
 
     data() {
         return {
+            resolutions: [],
             loading: false,
             channel: null,
             user: null,
@@ -79,6 +89,8 @@ export default {
                     token: encodeURI(response.data.user.stream.playbackAccessToken.value),
                     sig: response.data.user.stream.playbackAccessToken.signature,
                 });
+
+                this.fetchQualityList();
             }
         });
 
@@ -103,6 +115,34 @@ export default {
 
         _query() {
             return Object.keys(this.stream.parameters).map(key => `${key}=${this.stream.parameters[key]}`).join('&');
+        }
+    },
+
+    methods: {
+        fetchQualityList() {
+            fetch(this.url)
+                .then(response => response.text())
+                .then(response => {
+                    const lines = response.split(/[\r\n]/);
+                    const re = /^#EXT-X-MEDIA:|#EXT-X-STREAM-INF:|http/;
+
+                    lines.filter(line => re.test(line))
+                        .join("\r\n")
+                        .split('m3u8')
+                        .filter(line => line)
+                        .forEach(line => {
+                            const lines = line.trim().split(/[\r\n]/).filter(line => line);
+
+                            this.resolutions.push({
+                                quality: lines[0].match(/(NAME=")(.*)(")/)[2],
+                                url: `${lines[2]}m3u8`,
+                            });
+                        });
+                });
+        },
+
+        setQuality(link) {
+            this.$refs.video.setAttribute('src', link);
         }
     }
 }
@@ -165,6 +205,14 @@ export default {
         color: #9147FF;
     }
 
+    &__quality {
+        padding: 10px;
+
+        &-button {
+            margin: 0 5px 5px 0;
+        }
+    }
+
     @media all and (min-width: 1024px) {
         &__video,
         &__content {
@@ -173,7 +221,7 @@ export default {
         }
 
         &__video {
-            width: calc(100% - 280px);
+            width: calc(100% - 284px);
         }
 
         &__content {
