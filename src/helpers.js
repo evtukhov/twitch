@@ -3,28 +3,6 @@
 */
 
 /**
- * Simple debounce function.
- *
- * @param fn
- * @param delay
- * @returns {(function(): void)|*}
- */
-const debounce = (fn, delay) => {
-    let timeoutID = null;
-
-    return function () {
-        clearTimeout(timeoutID)
-
-        let args = arguments;
-        let that = this;
-
-        timeoutID = setTimeout(function () {
-            fn.apply(that, args);
-        }, delay);
-    }
-}
-
-/**
  * Format number to K or M.
  *
  * @param count
@@ -99,5 +77,5 @@ const cookie = () => {
 }
 
 export {
-    format, cookie, app, debounce
+    format, cookie, app
 }
