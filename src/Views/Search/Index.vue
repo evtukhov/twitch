@@ -27,7 +27,7 @@
 import SearchSuggestionChannel from '@/Components/Search/Suggestion/Channel';
 import SearchSuggestionCategory from '@/Components/Search/Suggestion/Category';
 import {api} from "@/Utilites/Api.js";
-import {debounce} from "@/helpers.js";
+import {debounce} from "lodash";
 
 export default {
     name: "SearchIndex",
@@ -46,10 +46,6 @@ export default {
                 }
             }
         }
-    },
-
-    mounted() {
-        this.$refs.input.focus();
     },
 
     methods: {
