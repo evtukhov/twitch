@@ -18,3 +18,6 @@ and save it.
 __Usage__
 
 Click on bookmark wait page loading, after page loaded click second times.
+
+See more at:
+https://www.reddit.com/r/LegacyJailbreak/comments/yubo9v/working_twitch_web_app_for_legacy_ios_tutorial/
