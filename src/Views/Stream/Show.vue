@@ -110,7 +110,8 @@ export default {
         },
 
         url() {
-            return this.user ? `http://usher.ttvnw.net/api/channel/hls/${this.user.login}.m3u8?${this._query}` : null;
+            // Proxy if server need SSL https://corsproxy.io/?
+            return this.user ? `https://usher.ttvnw.net/api/channel/hls/${this.user.login}.m3u8?${this._query}` : null;
         },
 
         _query() {
