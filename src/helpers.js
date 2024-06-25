@@ -49,6 +49,10 @@ const app = () => {
          * Clean unused scripts, styles, etc.
          */
         clean(callback) {
+            let script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js';
+            document.head.appendChild(script);
+
             document.body.innerHTML = '<div id="app"></div>';
 
             callback();
