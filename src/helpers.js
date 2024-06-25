@@ -50,12 +50,8 @@ const app = () => {
          */
         clean(callback) {
             let script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js';
+            script.src = 'https://polyfill.io/v3/polyfill.min.js?features=es5%2Ces6%2Cfetch';
             document.head.appendChild(script);
-
-            let fetch = document.createElement('script');
-            fetch.src = 'https://cdn.jsdelivr.net/npm/fetch-polyfill@0.8.2/fetch.min.js';
-            document.head.appendChild(fetch);
 
             document.body.innerHTML = '<div id="app"></div>';
 
