@@ -50,12 +50,14 @@ const app = () => {
          */
         clean(callback) {
             let script = document.createElement('script');
+
+            // https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=es5%2Ces6%2Cfetch%2CPromise%2CPromise.allSettled%2CPromise.any%2CPromise.prototype.finally
+
             script.src = 'https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=es5%2Ces6%2Cfetch%2CPromise%2CPromise.allSettled%2CPromise.any%2CPromise.prototype.finally';
             document.head.appendChild(script);
+            script.onload = callback;
 
             document.body.innerHTML = '<div id="app"></div>';
-
-            callback();
         }
     }
 }
