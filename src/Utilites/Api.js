@@ -12,9 +12,8 @@ class Api {
             headers: {
                 "accept": "application/json",
                 "content-type": "application/json",
-                // TODO: Search Client ID this in the server response.
-                "client-id": "r8s4dac0uhzifbpu9sjdiwzctle17ff",
-                "device-id": cookie().get('unique_id_samesite_compat')
+                "client-id": window.clientId,
+                "device-id": cookie().get('unique_id_samesite_compat'),
             },
             body: JSON.stringify({})
         }
