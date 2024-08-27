@@ -37,6 +37,13 @@ app().check().clean(() => {
             return createElement(LayoutsDefault);
         },
 
+        async beforeMount() {
+            // Set clientId as global variable for use in request header.
+            const response = await fetch('https://m.twitch.tv');
+            const rawHTML = await response.text();
+            window.clientId = rawHTML.match(/clientId="(.*?)"/)[1];
+        },
+
         mounted() {
             router.afterEach((to) => {
                 Vue.nextTick(() => {
