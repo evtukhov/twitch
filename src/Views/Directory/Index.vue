@@ -35,7 +35,7 @@ export default {
             query: {
                 query: "query GamesDirectory_Query(\n  $gamesCount: Int!\n  $cursor: Cursor\n  $hasTagId: Boolean!\n  $tagId: ID!\n  $tags: [String!]\n  $url: String!\n) {\n  ...GameList_query\n  ...SeoHead_query\n}\n\nfragment ActiveTagFilter_query on Query {\n  contentTag(id: $tagId) {\n    ...useTagLinkFragment_tag\n    id\n    __typename\n  }\n}\n\nfragment DirectoryGameCard_game on Game {\n  ...useGameCardCommonFragment_game\n}\n\nfragment GameList_query on Query {\n  ...ActiveTagFilter_query @include(if: $hasTagId)\n  games(first: $gamesCount, after: $cursor, tags: $tags) {\n    edges {\n      cursor\n      node {\n        id\n        __typename\n        ...DirectoryGameCard_game\n      }\n    }\n  }\n}\n\nfragment SeoHead_query on Query {\n  urlMetadata(url: $url) {\n    title\n    metatags {\n      name\n      attributes {\n        key\n        value\n      }\n    }\n    jsonld\n    share {\n      title\n      text\n      url\n    }\n  }\n}\n\nfragment useGameCardCommonFragment_game on Game {\n  boxArtURL\n  displayName\n  name\n  viewersCount\n  ...useGameTagListFragment_game\n}\n\nfragment useGameTagListFragment_game on Game {\n  gameTags: tags(limit: 10, tagType: CONTENT) {\n    ...useTagLinkFragment_tag\n    id\n    __typename\n  }\n}\n\nfragment useTagLinkFragment_tag on Tag {\n  id\n  __typename\n  tagName\n  localizedDescription\n  localizedName\n}\n",
                 variables: {
-                    gamesCount: 48,
+                    gamesCount: 100,
                     cursor: null,
                     hasTagId: false,
                     tagId: "",
